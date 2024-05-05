@@ -1,22 +1,40 @@
+#include <stdlib.h>
 #include <stdio.h>
+
+void check_error(int num)
+{
+    if (num == 1)
+        printf("Not a number");
+    if (num == 2)
+        printf("SPACE");
+    exit(1);
+}
+
+void    check_space(char **args)
+{
+    int i;
+    int j;
+    int spcs;
+
+    i = 1;
+    j = 0;
+    while (args[i])
+    {
+        j = 0;
+        while (args[i][j])
+        {
+            if (args[i][j] == ' ')
+                spcs++;
+            j++;
+        }
+        if (j == spcs)
+            check_error(2);
+        i++;
+    }
+}
 
 int main(int argc, char **argv)
 {
-    int i = 0;
-    int j = 0;
-    int *ints;
-    int spc = 0;
-
-    while (argv[i])
-    {
-        while (argv[i][j])
-        {
-            if (argv[i][j] == ' ' )
-            if (argv[i][j] == ' ')
-                spc++;
-            
-        }
-        
-    }
+    check_space(argv);
     
 }

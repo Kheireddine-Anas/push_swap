@@ -24,6 +24,28 @@ char	*ft_strdup(char *s)
 	return (dst);
 }
 
+void	check_nbrs(char **args)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (args[i])
+	{
+		while (args[i][j])
+		{
+			if ((args[i][0] == '-' || args[i][0] == '+') && (args[i][1] <= '0' && args[i][1] >= '9'))
+			{
+				check_error();
+			}
+			
+		}
+		
+	}
+	
+}
+
 void	args_con(char **args)
 {
 	char	**fnl;
@@ -32,24 +54,25 @@ void	args_con(char **args)
 	int		j;
 	i = 0;
 	j = 0;
-	con = ft_strdup(" ");
+	con = ft_strdup("");
 	while (args[i])
 	{
 		con = ft_strjoin(con, " ");
 		con = ft_strjoin(con, args[i]);
 		i++;
 	}
-	printf("*%s*\n", con);
 	fnl = ft_split(con, ' ');
-	printf("#%s#\n", fnl[3]);
+	check_nbrs(fnl);
 }
 int main(int argc, char **argv)
 {
 	int i = 0;
 	int j = 0;
-	int *ints;
+	// int *ints;
 	int spc;
 
+	if (argc < 2)
+		check_error();
 	while (argv[i])
 	{
 		j = 0;
