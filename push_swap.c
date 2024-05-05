@@ -79,7 +79,6 @@ void	check_nbrs(char **args)
 		}
 		i++;
 	}
-	
 }
 
 void	args_con(char **args)
