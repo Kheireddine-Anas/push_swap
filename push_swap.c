@@ -1,8 +1,18 @@
 #include "push_swap.h"
 
-void	check_error(void)
+void	check_error(int i)
 {
-	printf("Non\n");
+	if (i == 1)
+		printf("Non1\n");
+	if (i == 2)
+		printf("Non2\n");
+	if (i == 3)
+		printf("Non3\n");
+	if (i == 4)
+		printf("Non4\n");
+	if (i == 5)
+		printf("Non5\n");
+	
 	exit(1);
 }
 
@@ -24,6 +34,30 @@ char	*ft_strdup(char *s)
 	return (dst);
 }
 
+void	check_chars(char **args)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (args[i])
+	{
+		j = 0;
+		while (args[i][j])
+		{
+			if ((args[i][j] != '-' && args[i][j] != '+')
+				&& !(args[i][j] >= '0' && args[i][j] <= '9'))
+			{
+				printf("%d-%d-%c", i, j, args[i][j]);
+				check_error(2);
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
 void	check_nbrs(char **args)
 {
 	int	i;
@@ -35,13 +69,15 @@ void	check_nbrs(char **args)
 	{
 		while (args[i][j])
 		{
-			if ((args[i][0] == '-' || args[i][0] == '+') && (args[i][1] <= '0' && args[i][1] >= '9'))
+			printf("%c<<\n", args[i][j]);
+			if ((args[i][j] == '-' || args[i][j] == '+') && !(args[i][j + 1] >= '0' && args[i][j + 1] <= '9'))
 			{
-				check_error();
+				printf("%c>> %d , %d\n", args[i][j], i, j);
+				check_error(5);
 			}
-			
+			j++;
 		}
-		
+		i++;
 	}
 	
 }
@@ -62,17 +98,18 @@ void	args_con(char **args)
 		i++;
 	}
 	fnl = ft_split(con, ' ');
-	check_nbrs(fnl);
+	check_chars(fnl);
+	check_nbrs(args);
 }
 int main(int argc, char **argv)
 {
-	int i = 0;
-	int j = 0;
+	int i = 1;
+	int j;
 	// int *ints;
 	int spc;
 
 	if (argc < 2)
-		check_error();
+		check_error(3);
 	while (argv[i])
 	{
 		j = 0;
@@ -84,7 +121,7 @@ int main(int argc, char **argv)
 			j++;
 		}
 		if (j == spc)
-			check_error();
+			check_error(4);
 		i++;
 	}
 	args_con(argv + 1);
