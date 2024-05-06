@@ -12,6 +12,8 @@ void	check_error(int i)
 		printf("Non4\n");
 	if (i == 5)
 		printf("Non5\n");
+	if (i == 6)
+		printf("Non6\n");
 	
 	exit(1);
 }
@@ -64,16 +66,21 @@ void	check_nbrs(char **args)
 	int	j;
 
 	i = 0;
-	j = 0;
 	while (args[i])
 	{
+		j = 0;
+		if ((args[i][0] == '-' || args[i][0] == '+')
+			&& !(args[i][1] >= '0' && args[i][1] <= '9'))
+			check_error(5);
+		if ((args[i][0] == '-' || args[i][0] == '+')
+			&& (args[i][1] >= '0' && args[i][1] <= '9'))
+			j++;
 		while (args[i][j])
 		{
-			printf("%c<<\n", args[i][j]);
-			if ((args[i][j] == '-' || args[i][j] == '+') && !(args[i][j + 1] >= '0' && args[i][j + 1] <= '9'))
+			if (!(args[i][j] >= '0' && args[i][j] <= '9'))
 			{
-				printf("%c>> %d , %d\n", args[i][j], i, j);
-				check_error(5);
+				printf("#%d, %d, %c $%s#\n", i, j, args[i][j], args[i]);
+				check_error(6);
 			}
 			j++;
 		}
@@ -81,7 +88,7 @@ void	check_nbrs(char **args)
 	}
 }
 
-void	args_con(char **args)
+char	**args_con(char **args)
 {
 	char	**fnl;
 	char	*con;
@@ -97,13 +104,17 @@ void	args_con(char **args)
 		i++;
 	}
 	fnl = ft_split(con, ' ');
+	free(con);
 	check_chars(fnl);
-	check_nbrs(args);
+	check_nbrs(fnl);
+	// check_ornbr();
+	return (fnl);
 }
 int main(int argc, char **argv)
 {
 	int i = 1;
 	int j;
+	char	**nbrs;
 	// int *ints;
 	int spc;
 
@@ -123,5 +134,8 @@ int main(int argc, char **argv)
 			check_error(4);
 		i++;
 	}
-	args_con(argv + 1);
+	nbrs = args_con(argv + 1);
+	printf("%s", nbrs[0]);
+	pause();
+	// into_stack();
 }
