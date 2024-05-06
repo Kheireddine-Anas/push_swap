@@ -15,8 +15,13 @@ typedef struct	s_stacks{
 
 char	**ft_split(char const *str, char c);
 char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strdup(char *s);
 size_t	ft_strlen(char *s);
 int		ft_atoi(char *str);
-void	to_stack(char **arrays, t_stacks *stack);
+t_stacks	*to_stack(char **arrays, t_stacks *stack);
+int	stack_size(char **stack);
+void	check_error(int i);
+void	check_duplicated(t_stacks *stack, int size);
+void	is_sorted(t_stacks *stack, int size);
 
 #endif

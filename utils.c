@@ -6,7 +6,7 @@
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 15:19:13 by akheired          #+#    #+#             */
-/*   Updated: 2024/05/06 15:38:47 by akheired         ###   ########.fr       */
+/*   Updated: 2024/05/06 22:35:17 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,21 +74,26 @@ int	stack_size(char **stack)
 	int	i;
 
 	i = 0;
-	while(stack[i])
+	while (stack[i])
 		i++;
 	return (i);
 }
 
-void	to_stack(char **arrays, t_stacks *stack)
+void	check_duplicated(t_stacks *stack, int size)
 {
 	int	i;
-	
+	int	j;
+
 	i = 0;
-	stack->a = malloc(sizeof(int) * stack_size(arrays));
-	stack->b = malloc(sizeof(int));
-	while (arrays[i])
+	while (i < size)
 	{
-		stack->a[i] = ft_atoi(arrays[i]);
+		j = i + 1;
+		while (j < size)
+		{
+			if (stack->a[i] == stack->a[j])
+				check_error(7);
+			j++;
+		}
 		i++;
 	}
 }

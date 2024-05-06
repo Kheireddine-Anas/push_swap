@@ -14,26 +14,12 @@ void	check_error(int i)
 		printf("Non5\n");
 	if (i == 6)
 		printf("Non6\n");
+	if (i == 7)
+		printf("Non7\n");
+	if (i == 8)
+		printf("Non8\n");
 	
 	exit(1);
-}
-
-char	*ft_strdup(char *s)
-{
-	char	*dst;
-	int		i;
-
-	i = 0;
-	dst = (char *)malloc(ft_strlen(s) + 1);
-	if (!dst)
-		return (NULL);
-	while (s[i])
-	{
-		dst[i] = s[i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (dst);
 }
 
 void	check_chars(char **args)
@@ -88,42 +74,13 @@ void	check_nbrs(char **args)
 	}
 }
 
-char	**args_con(char **args, t_stacks *stacks)
+void	check_spc(char **argv)
 {
-	char	**fnl;
-	char	*con;
-	int		i;
-	int		j;
+	int	i;
+	int	j;
+	int	spc;
 
 	i = 0;
-	j = 0;
-	con = ft_strdup("");
-	while (args[i])
-	{
-		con = ft_strjoin(con, " ");
-		con = ft_strjoin(con, args[i]);
-		i++;
-	}
-	fnl = ft_split(con, ' ');
-	free(con);
-	check_chars(fnl);
-	check_nbrs(fnl);
-	to_stack(fnl, stacks);
-	// check_duplicated();
-	return (fnl);
-}
-int main(int argc, char **argv)
-{
-	int i = 1;
-	int j;
-	t_stacks	*stacks;
-	stacks = malloc(sizeof(int));
-	char	**nbrs;
-	// int *ints;
-	int spc;
-
-	if (argc < 2)
-		check_error(3);
 	while (argv[i])
 	{
 		j = 0;
@@ -138,7 +95,62 @@ int main(int argc, char **argv)
 			check_error(4);
 		i++;
 	}
-	nbrs = args_con(argv + 1, stacks);
+}
+
+char	**args_con(char **args)
+{
+	char	**fnl;
+	char	*con;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	check_spc(args);
+	con = ft_strdup("");
+	while (args[i])
+	{
+		con = ft_strjoin(con, " ");
+		con = ft_strjoin(con, args[i]);
+		i++;
+	}
+	fnl = ft_split(con, ' ');
+	free(con);
+	check_chars(fnl);
+	check_nbrs(fnl);
+	return (fnl);
+}
+
+t_stacks	*make_stack(int size, char **args)
+{
+	t_stacks	*stacks;
+	int			i;
+
+	i = 0;
+	stacks = malloc(sizeof(t_stacks));
+	stacks->a = malloc(sizeof(int) * size);
+	stacks->b = malloc(sizeof(int) * size);
+	while (i < size)
+	{
+		stacks->a[i] = ft_atoi(args[i]);
+		i++;
+	}
+	check_duplicated(stacks, stack_size(args));
+	is_sorted(stacks, stack_size(args));
+	return (stacks);
+}
+
+int main(int argc, char **argv)
+{
+	t_stacks	*stacks;
+	char	**nbrs;
+	// int *ints;
+
+	if (argc < 2)
+		check_error(3);
+	nbrs = args_con(argv + 1);
+	stacks = make_stack(stack_size(nbrs), nbrs);
+	printf("%d\n", stacks->a[3]);
 	// stacks = make_stack();
 	// printf("%s", nbrs[0]);
 	// pause();
