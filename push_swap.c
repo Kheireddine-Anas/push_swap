@@ -137,6 +137,7 @@ t_stacks	*make_stack(int size, char **args)
 	}
 	check_duplicated(stacks, stack_size(args));
 	is_sorted(stacks, stack_size(args));
+	free(args);
 	return (stacks);
 }
 
