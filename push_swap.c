@@ -88,12 +88,13 @@ void	check_nbrs(char **args)
 	}
 }
 
-char	**args_con(char **args)
+char	**args_con(char **args, t_stacks *stacks)
 {
 	char	**fnl;
 	char	*con;
 	int		i;
 	int		j;
+
 	i = 0;
 	j = 0;
 	con = ft_strdup("");
@@ -107,13 +108,16 @@ char	**args_con(char **args)
 	free(con);
 	check_chars(fnl);
 	check_nbrs(fnl);
-	// check_ornbr();
+	to_stack(fnl, stacks);
+	// check_duplicated();
 	return (fnl);
 }
 int main(int argc, char **argv)
 {
 	int i = 1;
 	int j;
+	t_stacks	*stacks;
+	stacks = malloc(sizeof(int));
 	char	**nbrs;
 	// int *ints;
 	int spc;
@@ -134,8 +138,9 @@ int main(int argc, char **argv)
 			check_error(4);
 		i++;
 	}
-	nbrs = args_con(argv + 1);
-	printf("%s", nbrs[0]);
-	pause();
+	nbrs = args_con(argv + 1, stacks);
+	// stacks = make_stack();
+	// printf("%s", nbrs[0]);
+	// pause();
 	// into_stack();
 }
