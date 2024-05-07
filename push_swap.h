@@ -23,5 +23,6 @@ int	stack_size(char **stack);
 void	check_error(int i);
 void	check_duplicated(t_stacks *stack, int size);
 void	is_sorted(t_stacks *stack, int size);
+void	sa(t_stacks *stack);
 
 #endif

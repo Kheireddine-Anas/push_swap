@@ -151,7 +151,8 @@ int main(int argc, char **argv)
 		check_error(3);
 	nbrs = args_con(argv + 1);
 	stacks = make_stack(stack_size(nbrs), nbrs);
-	printf("%d\n", stacks->a[3]);
+	sa(stacks);
+	// printf("%d\n", stacks->a[0]);
 	// stacks = make_stack();
 	// printf("%s", nbrs[0]);
 	// pause();
