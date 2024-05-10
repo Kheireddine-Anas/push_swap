@@ -7,8 +7,8 @@ void	sa(t_stacks *stack)
 	if (stack->a[0] > stack->a[1])
 	{
 		tmp = stack->a[0];
-		stack->a[1] = tmp;
 		stack->a[0] = stack->a[1];
+		stack->a[1] = tmp;
 	}
 	write(1, "sa\n", 4);
 }
