@@ -102,10 +102,10 @@ char	**args_con(char **args)
 	char	**fnl;
 	char	*con;
 	int		i;
-	int		j;
+	// int		j;
 
 	i = 0;
-	j = 0;
+	// j = 0;
 	check_spc(args);
 	con = ft_strdup("");
 	while (args[i])
@@ -121,6 +121,75 @@ char	**args_con(char **args)
 	return (fnl);
 }
 
+int	*arr_cp(t_stacks *stack)
+{
+	int	i;
+	int	*arr;
+
+	i = 0;
+	arr = malloc(sizeof(int) * (stack->size_a));
+	while (i <= stack->size_a)
+	{
+		arr[i] = stack->a[i];
+		i++;
+	}
+	return (arr);
+}
+
+int	*sort_them(t_stacks *stack_a)
+{
+	int	size;
+	int	tmp;
+	int	*arr;
+	int	i;
+	int	j;
+
+	i = 0;
+	size = stack_a->size_a;
+	arr = arr_cp(stack_a);
+	while (i < size)
+	{
+		j = 0;
+		while (j < size - i)
+		{
+			if(arr[j] > arr[j + 1])
+			{
+				tmp =arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = tmp;
+			}
+			j++;
+		}
+		i++;
+	}
+	return (arr);
+}
+
+int	get_index(int *arr, int nbr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i] != nbr)
+		i++;
+	return (i);
+}
+
+void	fill_stack_b(t_stacks *stack)
+{
+	int	*sorted;
+	int	index;
+
+	sorted = sort_them(stack); //freeeeee
+	while (stack->size_a >= 0)
+	{
+		index = get_index(sorted, stack->a[stack->size_a]);
+	}
+	
+	pause();
+	return;
+}
+
 t_stacks	*make_stack(int size, char **args)
 {
 	t_stacks	*stacks;
@@ -130,14 +199,20 @@ t_stacks	*make_stack(int size, char **args)
 	stacks = malloc(sizeof(t_stacks));
 	stacks->a = malloc(sizeof(int) * size);
 	stacks->b = malloc(sizeof(int) * size);
-	while (i < size)
+	// stacks->size_a = malloc(sizeof(int));
+	// stacks->size_b = malloc(sizeof(int));
+	stacks->size_a = size - 1;
+	stacks->size_b = -1;
+	while (size--)
 	{
-		stacks->a[i] = ft_atoi(args[i]);
+		stacks->a[i] = ft_atoi(args[size]);
 		i++;
 	}
-	check_duplicated(stacks, stack_size(args));
-	is_sorted(stacks, stack_size(args));
+	check_duplicated(stacks, stacks->size_a);
+	if (is_sorted(stacks, stacks->size_a))
+			exit(1);
 	free(args);
+	fill_stack_b(stacks);
 	return (stacks);
 }
 
@@ -147,14 +222,21 @@ int main(int argc, char **argv)
 	char	**nbrs;
 	// int *ints;
 
-	if (argc < 2)
-		check_error(3);
-	nbrs = args_con(argv + 1);
-	stacks = make_stack(stack_size(nbrs), nbrs);
-	sa(stacks);
-	// printf("%d\n", stacks->a[0]);
-	// stacks = make_stack();
-	// printf("%s", nbrs[0]);
-	// pause();
-	// into_stack();
+	if (argc > 1)
+	{
+		nbrs = args_con(argv + 1);
+		stacks = make_stack(stack_size(nbrs), nbrs);
+		// printf("%d $ %d\n", stacks->a[0], stacks->a[1]);
+		// if (!(is_sorted(stacks, stacks->size_a)))
+		// 	sa(stacks);
+		// printf("%d # %d\n", stacks->a[0], stacks->a[1]);
+		// free(stacks);
+		// printf("%d\n", stacks->a[0]);
+		// printf("%d\n", stacks->a[0]);
+		// stacks = make_stack();
+		// printf("%s", nbrs[0]);
+		// pause();
+		// into_stack();
+	}
+	return (0);
 }

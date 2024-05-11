@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slazar <slazar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 22:35:21 by akheired          #+#    #+#             */
-/*   Updated: 2024/05/08 11:28:43 by akheired         ###   ########.fr       */
+/*   Updated: 2024/05/10 12:44:25 by slazar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,23 @@ char	*ft_strdup(char *s)
 	return (dst);
 }
 
-void	is_sorted(t_stacks *stack, int size)
+int	is_sorted(t_stacks *stack, int size)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < size)
+	while (i <= size)
 	{
 		j = i + 1;
-		while (j < size)
+		while (j <= size)
 		{
-			if (stack->a[i] > stack->a[j])
-				return;
+			if (stack->a[i] < stack->a[j])
+				return (0);
 			j++;
 		}
 		i++;
 	}
+	return (1);
 }
  

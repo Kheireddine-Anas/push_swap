@@ -4,13 +4,13 @@ void	sa(t_stacks *stack)
 {
 	int	tmp;
 
-	if (stack->a[0] > stack->a[1])
+	if (stack->size_a >= 1)
 	{
-		tmp = stack->a[0];
-		stack->a[0] = stack->a[1];
-		stack->a[1] = tmp;
+		tmp = stack->a[stack->size_a];
+		stack->a[stack->size_a] = stack->a[stack->size_a - 1];
+		stack->a[stack->size_a - 1] = tmp;
+		write(1, "sa\n", 3);
 	}
-	write(1, "sa\n", 4);
 }
 
 void	sb(t_stacks *stack)
