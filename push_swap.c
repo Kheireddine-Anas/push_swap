@@ -179,13 +179,46 @@ void	fill_stack_b(t_stacks *stack)
 {
 	int	*sorted;
 	int	index;
+	int	start;
+	int	end;
 
+	start = 0;
+	if (stack->size_a >= 100)
+		end = 15;
+	else if (stack->size_a < 100)
+		end = 35;
+	
 	sorted = sort_them(stack); //freeeeee
+		printf("%d\n", stack->size_a);
 	while (stack->size_a >= 0)
 	{
 		index = get_index(sorted, stack->a[stack->size_a]);
+		if (index >= start && index <= end)
+		{
+			pb(stack);
+			rb(stack);
+			end++;
+			start++;
+		}
+		else if (index > end)
+		{
+			ra(stack);
+			start++;
+			end++;
+		}
+		else
+		{
+			pb(stack);
+		}
 	}
-	
+	printf("| %d |    | %d |    | %d |    | %d |\n", stack->a[0], stack->b[0], sorted[0], stack->size_b);
+	printf("| %d |    | %d |    | %d |    | %d |\n", stack->a[1], stack->b[1], sorted[1], stack->size_b);
+	printf("| %d |    | %d |    | %d |    | %d |\n", stack->a[2], stack->b[2], sorted[2], stack->size_b);
+	printf("| %d |    | %d |    | %d |    | %d |\n", stack->a[3], stack->b[3], sorted[3], stack->size_b);
+	printf("| %d |    | %d |    | %d |    | %d |\n", stack->a[4], stack->b[4], sorted[4], stack->size_b);
+	printf("| %d |    | %d |    | %d |    | %d |\n", stack->a[5], stack->b[5], sorted[5], stack->size_b);
+	printf("| %d |    | %d |    | %d |    | %d |\n", stack->a[6], stack->b[6], sorted[6], stack->size_b);
+	printf("| %d |    | %d |    | %d |    | %d |\n", stack->a[7], stack->b[7], sorted[7], stack->size_b);
 	pause();
 	return;
 }

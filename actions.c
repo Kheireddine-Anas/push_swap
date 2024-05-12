@@ -13,23 +13,65 @@ void	sa(t_stacks *stack)
 	}
 }
 
-void	sb(t_stacks *stack)
+void	pa(t_stacks *stack)
 {
-	int	tmp;
-
-	if (stack->b[0] > stack->b[1])
-	{
-		tmp = stack->b[0];
-		stack->b[0] = stack->b[1];
-		stack->b[1] = tmp;
-	}
-	write(1, "sb\n", 4);
+	if (stack->size_b < 0)
+		return ;
+	stack->size_a++;
+	stack->a[stack->size_a] = stack->b[stack->size_b];
+	stack->size_b--;
+	write(1, "pa\n", 3);
 }
 
-// void	ss(t_stacks *stack)
-// {
+void	pb(t_stacks *stack)
+{
+	if (stack->size_a < 0)
+		return ;
+	stack->size_b++;
+	stack->b[stack->size_b] = stack->a[stack->size_a];
+	stack->size_a--;
+	printf("%d | %d | %d\n", stack->b[stack->size_b], stack->size_b, stack->size_a);
+	pause();
+	write(1, "pb\n", 3);
+}
 
-// }
+void	ra(t_stacks *stack)
+{
+	int	tmp;
+	int	i;
+
+	if (stack->size_a >= 1)
+	{
+		i = stack->size_a;
+		tmp = stack->a[i];
+		while (i > 0)
+		{
+			stack->a[i] = stack->a[i - 1];
+			i--;
+		}
+		stack->a[i] = tmp;
+		write(1, "ra\n", 3);
+	}
+}
+
+void	rb(t_stacks *stack)
+{
+	int	tmp;
+	int	i;
+
+	if (stack->size_b >= 1)
+	{
+		i = stack->size_b;
+		tmp = stack->b[i];
+		while (i > 0)
+		{
+			stack->b[i] = stack->b[i - 1];
+			i--;
+		}
+		stack->b[i] = tmp;
+		write(1, "rb\n", 3);
+	}
+}
 
 // void	sb(t_stacks *stack)
 // {

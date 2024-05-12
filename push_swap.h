@@ -26,5 +26,9 @@ void	check_error(int i);
 void	check_duplicated(t_stacks *stack, int size);
 int		is_sorted(t_stacks *stack, int size);
 void	sa(t_stacks *stack);
+void	pa(t_stacks *stack);
+void	ra(t_stacks *stack);
+void	rb(t_stacks *stack);
+void	pb(t_stacks *stack);
 
 #endif
