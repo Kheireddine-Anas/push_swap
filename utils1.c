@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slazar <slazar@student.42.fr>              +#+  +:+       +#+        */
+/*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 22:35:21 by akheired          #+#    #+#             */
-/*   Updated: 2024/05/10 12:44:25 by slazar           ###   ########.fr       */
+/*   Updated: 2024/05/13 17:49:12 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,44 @@ int	is_sorted(t_stacks *stack, int size)
 	}
 	return (1);
 }
- 
+
+int	get_biggest(int *stack, int size)
+{
+	int	i;
+	int	tmp;
+	int	in;
+
+	i = 0;
+	in = 0;
+	tmp = stack[i];
+	while (i <= size)
+	{
+		if (stack[i] > tmp)
+		{
+			tmp = stack[i];
+			in = i;
+		}
+		i++;
+	}
+	return (in);
+}
+
+void	fill_stack_a(t_stacks *stack)
+{
+	int	biggest;
+
+	int i = 0;
+	// while (stack->size_b >= 0)
+	while (i <= 19)
+	{
+		biggest = get_biggest(stack->b, stack->size_b);
+		if (biggest == stack->size_b)
+			pa(stack);
+		else if (stack->size_b - biggest <= biggest)
+			rb(stack);
+		else if (stack->size_b - biggest > biggest)
+			rrb(stack);
+		i++;
+	}
+	pause();
+}

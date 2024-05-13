@@ -37,7 +37,6 @@ void	check_chars(char **args)
 			if ((args[i][j] != '-' && args[i][j] != '+')
 				&& !(args[i][j] >= '0' && args[i][j] <= '9'))
 			{
-				printf("%d-%d-%c", i, j, args[i][j]);
 				check_error(2);
 			}
 			j++;
@@ -65,7 +64,6 @@ void	check_nbrs(char **args)
 		{
 			if (!(args[i][j] >= '0' && args[i][j] <= '9'))
 			{
-				printf("#%d, %d, %c $%s#\n", i, j, args[i][j], args[i]);
 				check_error(6);
 			}
 			j++;
@@ -127,8 +125,8 @@ int	*arr_cp(t_stacks *stack)
 	int	*arr;
 
 	i = 0;
-	arr = malloc(sizeof(int) * (stack->size_a));
-	while (i <= stack->size_a)
+	arr = malloc(sizeof(int) * (stack->size_a) + 1);
+	while (i < stack->size_a)
 	{
 		arr[i] = stack->a[i];
 		i++;
@@ -175,52 +173,32 @@ int	get_index(int *arr, int nbr)
 	return (i);
 }
 
-void	fill_stack_b(t_stacks *stack)
+void	fill_stack_b(t_stacks *stack, int start, int end)
 {
 	int	*sorted;
 	int	index;
-	int	start;
-	int	end;
 
-	start = 0;
 	if (stack->size_a >= 100)
-		end = 15;
-	else if (stack->size_a < 100)
-		end = 35;
-	
-	sorted = sort_them(stack); //freeeeee
-		printf("%d\n", stack->size_a);
+		end = 30;
+	sorted = sort_them(stack);
 	while (stack->size_a >= 0)
 	{
 		index = get_index(sorted, stack->a[stack->size_a]);
-		if (index >= start && index <= end)
+		if (index >= end - start && index <= end)
+		{
+			pb(stack);
+			end++;
+		}
+		else if (index < end - start)
 		{
 			pb(stack);
 			rb(stack);
 			end++;
-			start++;
-		}
-		else if (index > end)
-		{
-			ra(stack);
-			start++;
-			end++;
 		}
 		else
-		{
-			pb(stack);
-		}
+			ra(stack);
 	}
-	printf("| %d |    | %d |    | %d |    | %d |\n", stack->a[0], stack->b[0], sorted[0], stack->size_b);
-	printf("| %d |    | %d |    | %d |    | %d |\n", stack->a[1], stack->b[1], sorted[1], stack->size_b);
-	printf("| %d |    | %d |    | %d |    | %d |\n", stack->a[2], stack->b[2], sorted[2], stack->size_b);
-	printf("| %d |    | %d |    | %d |    | %d |\n", stack->a[3], stack->b[3], sorted[3], stack->size_b);
-	printf("| %d |    | %d |    | %d |    | %d |\n", stack->a[4], stack->b[4], sorted[4], stack->size_b);
-	printf("| %d |    | %d |    | %d |    | %d |\n", stack->a[5], stack->b[5], sorted[5], stack->size_b);
-	printf("| %d |    | %d |    | %d |    | %d |\n", stack->a[6], stack->b[6], sorted[6], stack->size_b);
-	printf("| %d |    | %d |    | %d |    | %d |\n", stack->a[7], stack->b[7], sorted[7], stack->size_b);
-	pause();
-	return;
+	free(sorted);
 }
 
 t_stacks	*make_stack(int size, char **args)
@@ -232,10 +210,9 @@ t_stacks	*make_stack(int size, char **args)
 	stacks = malloc(sizeof(t_stacks));
 	stacks->a = malloc(sizeof(int) * size);
 	stacks->b = malloc(sizeof(int) * size);
-	// stacks->size_a = malloc(sizeof(int));
-	// stacks->size_b = malloc(sizeof(int));
 	stacks->size_a = size - 1;
 	stacks->size_b = -1;
+	stacks->range = 15;
 	while (size--)
 	{
 		stacks->a[i] = ft_atoi(args[size]);
@@ -244,8 +221,8 @@ t_stacks	*make_stack(int size, char **args)
 	check_duplicated(stacks, stacks->size_a);
 	if (is_sorted(stacks, stacks->size_a))
 			exit(1);
-	free(args);
-	fill_stack_b(stacks);
+	fill_stack_b(stacks, stacks->range, stacks->range);
+	fill_stack_a(stacks);
 	return (stacks);
 }
 
@@ -253,7 +230,6 @@ int main(int argc, char **argv)
 {
 	t_stacks	*stacks;
 	char	**nbrs;
-	// int *ints;
 
 	if (argc > 1)
 	{
@@ -270,6 +246,7 @@ int main(int argc, char **argv)
 		// printf("%s", nbrs[0]);
 		// pause();
 		// into_stack();
+		pause();
 	}
 	return (0);
 }

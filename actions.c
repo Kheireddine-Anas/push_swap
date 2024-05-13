@@ -30,8 +30,6 @@ void	pb(t_stacks *stack)
 	stack->size_b++;
 	stack->b[stack->size_b] = stack->a[stack->size_a];
 	stack->size_a--;
-	printf("%d | %d | %d\n", stack->b[stack->size_b], stack->size_b, stack->size_a);
-	pause();
 	write(1, "pb\n", 3);
 }
 
@@ -73,6 +71,23 @@ void	rb(t_stacks *stack)
 	}
 }
 
+void	rrb(t_stacks *stack)
+{
+	int	tmp;
+	int	i;
+
+	if (stack->size_b < 1)
+		return ;
+	i = 0;
+	tmp = stack->b[i];
+	while (i < stack->size_b)
+	{
+		stack->b[i] = stack->b[i + 1];
+		i++;
+	}
+	stack->b[i] = tmp;
+	write(1, "rrb\n", 4);
+}
 // void	sb(t_stacks *stack)
 // {
 
