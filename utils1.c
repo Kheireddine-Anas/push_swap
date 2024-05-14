@@ -6,7 +6,7 @@
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 22:35:21 by akheired          #+#    #+#             */
-/*   Updated: 2024/05/13 17:49:12 by akheired         ###   ########.fr       */
+/*   Updated: 2024/05/14 10:27:29 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,28 @@ int	get_biggest(int *stack, int size)
 	return (in);
 }
 
+// void	fill_stack_a(t_stacks *stack)
+// {
+// 	int	biggest;
+// 	int size;
+// 	while (stack->size_b >= 0)
+// 	{
+// 		size = stack->size_b;
+// 		biggest = get_biggest(stack->b, stack->size_b);
+// 		if (biggest == stack->size_b)
+// 			pa(stack);
+// 		else if (biggest > size / 2)
+// 			rb(stack);
+// 		else if (biggest <= size / 2)
+// 			rrb(stack);
+// 	}
+// }
+
 void	fill_stack_a(t_stacks *stack)
 {
 	int	biggest;
 
-	int i = 0;
-	// while (stack->size_b >= 0)
-	while (i <= 19)
+	while (stack->size_b >= 0)
 	{
 		biggest = get_biggest(stack->b, stack->size_b);
 		if (biggest == stack->size_b)
@@ -86,7 +101,5 @@ void	fill_stack_a(t_stacks *stack)
 			rb(stack);
 		else if (stack->size_b - biggest > biggest)
 			rrb(stack);
-		i++;
 	}
-	pause();
 }

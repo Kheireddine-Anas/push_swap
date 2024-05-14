@@ -69,6 +69,7 @@ void	rb(t_stacks *stack)
 		stack->b[i] = tmp;
 		write(1, "rb\n", 3);
 	}
+	return ;
 }
 
 void	rrb(t_stacks *stack)
