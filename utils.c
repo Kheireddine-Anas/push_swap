@@ -79,21 +79,20 @@ int	stack_size(char **stack)
 	return (i);
 }
 
-void	check_duplicated(t_stacks *stack, int size)
+int	check_duplicated(t_list *stack)
 {
-	int	i;
-	int	j;
+	t_list	*node;
 
-	i = 0;
-	while (i < size)
+	while (stack)
 	{
-		j = i + 1;
-		while (j < size)
+		node = stack->next;
+		while (node)
 		{
-			if (stack->a[i] == stack->a[j])
-				check_error(7);
-			j++;
+			if (node->nbr == stack->nbr)
+				return (1);
+			node = node->next;
 		}
-		i++;
+		stack = stack->next;
 	}
+	return (0);
 }

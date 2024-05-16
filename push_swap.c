@@ -1,43 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/14 19:35:48 by akheired          #+#    #+#             */
+/*   Updated: 2024/05/14 19:35:48 by akheired         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void	check_error(int i)
+void	check_error(void)
 {
-	if (i == 1)
-		printf("Non1\n");
-	if (i == 2)
-		printf("Non2\n");
-	if (i == 3)
-		printf("Non3\n");
-	if (i == 4)
-		printf("Non4\n");
-	if (i == 5)
-		printf("Non5\n");
-	if (i == 6)
-		printf("Non6\n");
-	if (i == 7)
-		printf("Non7\n");
-	if (i == 8)
-		printf("Non8\n");
-	
+	write(1, "Error\n", 7);
 	exit(1);
-}
-
-void	*ft_calloc(int count, int size)
-{
-	char	*hld;
-	int		i;
-
-	i = 0;
-	hld = malloc(count * size);
-	if (!hld)
-		return (NULL);
-	while (i < (count * size))
-	{
-		hld[i] = 0;
-		i++;
-	}
-	
-	return (hld);
 }
 
 void	check_chars(char **args)
@@ -54,9 +32,7 @@ void	check_chars(char **args)
 		{
 			if ((args[i][j] != '-' && args[i][j] != '+')
 				&& !(args[i][j] >= '0' && args[i][j] <= '9'))
-			{
-				check_error(2);
-			}
+				check_error();
 			j++;
 		}
 		i++;
@@ -74,16 +50,14 @@ void	check_nbrs(char **args)
 		j = 0;
 		if ((args[i][0] == '-' || args[i][0] == '+')
 			&& !(args[i][1] >= '0' && args[i][1] <= '9'))
-			check_error(5);
+			check_error();
 		if ((args[i][0] == '-' || args[i][0] == '+')
 			&& (args[i][1] >= '0' && args[i][1] <= '9'))
 			j++;
 		while (args[i][j])
 		{
 			if (!(args[i][j] >= '0' && args[i][j] <= '9'))
-			{
-				check_error(6);
-			}
+				check_error();
 			j++;
 		}
 		i++;
@@ -108,7 +82,7 @@ void	check_spc(char **argv)
 			j++;
 		}
 		if (j == spc)
-			check_error(4);
+			check_error();
 		i++;
 	}
 }
@@ -118,10 +92,8 @@ char	**args_con(char **args)
 	char	**fnl;
 	char	*con;
 	int		i;
-	// int		j;
 
 	i = 0;
-	// j = 0;
 	check_spc(args);
 	con = ft_strdup("");
 	while (args[i])
@@ -137,185 +109,244 @@ char	**args_con(char **args)
 	return (fnl);
 }
 
-int	*arr_cp(int *arrd, int size)
+void	*ft_calloc(int count, int size)
+{
+	char	*hld;
+	int		i;
+
+	hld = malloc(count * size);
+	i = 0;
+	if (!hld)
+		exit(1);
+	while (i < (count * size))
+	{
+		hld[i] = 0;
+		i++;
+	}
+	return (hld);
+}
+
+int	*arr_cp(t_list *head, int size)
 {
 	int	i;
 	int	*arr;
 
 	i = 0;
-	arr = malloc(sizeof(int) * (size + 1));
-	while (i <= size)
+	arr = malloc(sizeof(int) * size);
+	while (i < size)
 	{
-		arr[i] = arrd[i];
-		i++;
+		arr[i++] = head->nbr;
+		head = head->next;
 	}
 	return (arr);
 }
 
-int	*sort_them(t_stacks *stack_a)
+int	*sort_them(t_list *stack)
 {
 	int	size;
 	int	tmp;
 	int	*arr;
 	int	i;
-	// int	j;
+	int	j;
 
 	i = 0;
-	size = stack_a->size_a;
-	// arr = arr_cp(stack_a);
-	arr = arr_cp(stack_a->a, stack_a->size_a);
-	printf("%d  |%d\n",size , arr[i]);
-	while (i <= size)
+	size = ft_lstsize(stack);
+	arr = arr_cp(stack, size);
+	while (i < size)
 	{
-		if(arr[i] > arr[i + 1])
+		j = i + 1;
+		while (j < size)
 		{
-			tmp = arr[i];
-			arr[i] = arr[i + 1];
-			arr[i + 1] = tmp;
-			i = -1;
+			if (arr[i] > arr[j])
+			{
+				tmp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = tmp;
+			}
+			j++;
 		}
 		i++;
 	}
-	// i = 0;
-	// while (i <= stack_a->size_a)
-	// {
-	// 	printf("%d  |%d\n",i , arr[i]);
-	// 	i++;
-	// }
-	exit(1);
 	return (arr);
 }
 
-int	get_index(int *arr, int nbr, int size)
+int	get_index(t_list *stack, int nbr)
 {
 	int	i;
 
 	i = 0;
-	while (i < size && arr[i] != nbr)
+	while (stack)
+	{
+		if (nbr == stack->nbr)
+			return (i);
 		i++;
+		stack = stack->next;
+	}
 	return (i);
 }
 
-void	fill_stack_b(t_stacks *stack)
+void	set_index(t_list *stack, int *arr)
 {
-	int	*sorted;
-	int	index;
+	int	i;
+	int	size;
 
-	int	start = 0;
-	int	end = 15;
-	if (stack->size_a > 100)
-		end = 35;
-	sorted = sort_them(stack);
-	int kd=0;
-	int size = stack->size_a;
-	printf("%d  ?? %d  ??? %d\n", size, end , start);
-	while (stack->size_a >= 0)
+	size = ft_lstsize(stack);
+	while (stack)
 	{
-		index = get_index(sorted, stack->a[stack->size_a], stack->size_a);
-		if (index >= start && index <= end)
+		i = 0;
+		while (i < size)
 		{
-			pb(stack);
-			if (end <= size)
-				{start++;
-				end++;}
-			// start++;
-			// end++;
+			if (stack->nbr == arr[i])
+				stack->index = i;
+			i++;
 		}
-		else if (index < start)
-		{
-			pb(stack);
-			rb(stack);
-			if (end <= size)
-				{start++;
-				end++;}
-		}
-		else if (index > end)
-			ra(stack);
-		printf("start = %d | end = %d  | size = %d /// >>>%d\n", start, end, size, index);
-		printf("KD + %d\n", kd);
-		if(/*kd == 3 || kd == 4 || kd == 5 || kd ==6 || */ kd == 155 ||  kd == 156)
-		{
-			int kj=0;
-			while(kj <= 99)
-			{
-				printf("%d| %d |    | %d |    | %d |\n", kj, stack->a[kj], stack->b[kj], sorted[kj]);
-				kj++;
-			}
-		}
-		kd++;
+		stack = stack->next;
 	}
-	printf("||||\n");
-	printf("%d  ?? %d  ??? %d\n", size, end , start);
-	pause();
-	// printf("| %d |    | %d |    | %d |\n", stack->a[1], stack->b[1], sorted[1]);
-	// printf("| %d |    | %d |    | %d |\n", stack->a[2], stack->b[2], sorted[2]);
-	// printf("| %d |    | %d |    | %d |\n", stack->a[3], stack->b[3], sorted[3]);
-	// printf("| %d |    | %d |    | %d |\n", stack->a[4], stack->b[4], sorted[4]);
-	// printf("| %d |    | %d |    | %d |\n", stack->a[5], stack->b[5], sorted[5]);
-	// printf("| %d |    | %d |    | %d |\n", stack->a[6], stack->b[6], sorted[6]);
-	// printf("| %d |    | %d |    | %d |\n", stack->a[7], stack->b[7], sorted[7]);
-	// printf("| %d |    | %d |    | %d |\n", stack->a[8], stack->b[8], sorted[8]);
-	// printf("| %d |    | %d |    | %d |\n", stack->a[9], stack->b[9], sorted[9]);
-	// pause();
-	// printf("||||\n");
-	free(sorted);
 }
 
-void	make_stack(int size, char **args, t_stacks *stacks)
+void	range_algo(t_list **stack_a, t_list **stack_b, int start, int end)
 {
-	// t_stacks	*stacks = NULL;
+	while (ft_lstsize(*stack_a))
+	{
+		if ((*stack_a)->index < start)
+		{
+			pb(stack_a, stack_b, 1);
+			rb(stack_b, 1);
+			start++;
+			end++;
+		}
+		else if ((*stack_a)->index >= start && (*stack_a)->index <= end)
+		{
+			pb(stack_a, stack_b, 1);
+			start++;
+			end++;
+		}
+		else if ((*stack_a)->index > end)
+			ra(stack_a, 1);
+	}
+}
+
+void	fill_stack_b(t_list **stack_a, t_list **stack_b)
+{
+	// int	*sorted;
+	int	size;
+	int	range;
+	
+	range = 15;
+	// sorted = sort_them(*stack_a);
+	// set_index(*stack_a, sorted);
+	size = ft_lstsize(*stack_a);
+	if (size >= 100 && size <= 500)
+		range = 35;
+	range_algo(stack_a, stack_b, 0, range);
+	// free(sorted);
+}
+
+void	ft_lstadd_back(t_list **lst, t_list *new)
+{
+	t_list	*hld;
+
+	// if (!lst || !new)
+	// 	return ;
+	if (!(*lst))
+	{
+		*lst = new;
+		return ;
+	}
+	hld = *lst;
+	while (hld->next != NULL)
+		hld = hld->next;
+	hld->next = new;
+}
+
+t_list	*new_node(int nbr)
+{
+	t_list	*node;
+
+	node = malloc(sizeof(t_list));
+	node->nbr = nbr;
+	node->next = NULL;
+	return (node);
+}
+
+int	check_sort(t_list *stack)
+{
+	t_list	*head;
+	int	size;
+
+	size = ft_lstsize(stack);
+	head = stack->next;
+	while (size > 1 && stack->nbr < head->nbr)
+	{
+		size--;
+		stack = stack->next;
+		head = stack->next;
+	}
+	if (size > 1)
+		return (1);
+	return (0);
+}
+void	sorting3(t_list **stack_a)
+{
+	t_list	*head;
+	int		biggest;
+
+	biggest = get_max_index(*stack_a);
+	if ((*stack_a)->index == biggest)
+		ra(stack_a, 1);
+	else if (get_position(*stack_a, biggest) == 1)
+		rra(stack_a, 1);
+	head = (*stack_a)->next;
+	if (head->nbr < (*stack_a)->nbr)
+		sa(stack_a, 1);
+}
+
+void	make_stack(int size, char **args)
+{
+	t_list		*stack_a;
+	t_list		*stack_b;
+	t_list		*node;
 	int			i;
+	int			*sorted;
 
 	i = 0;
-	// stacks = malloc(sizeof(t_stacks));
-	stacks->a = ft_calloc(size, sizeof(int));
-	stacks->b = ft_calloc(size, sizeof(int));
-	// stacks->a = malloc(sizeof(int) * size);
-	// stacks->b = malloc(sizeof(int) * size);
-	stacks->size_a = size - 1;
-	stacks->size_b = -1;
-	stacks->range = 15;
-	while (size--)
+	stack_a = NULL;
+	stack_b = NULL;
+	while (i < size)
 	{
-		stacks->a[i] = ft_atoi(args[size]);
+		node = new_node(ft_atoi(args[i]));
+		ft_lstadd_back(&stack_a, node);
 		i++;
 	}
-	check_duplicated(stacks, stacks->size_a);
-	if (is_sorted(stacks, stacks->size_a))
-			exit(1);
-	fill_stack_b(stacks);
-	fill_stack_a(stacks);
-
-	// return (stacks);
+	if (!check_sort(stack_a))
+		check_error();
+	if (check_duplicated(stack_a))
+		check_error();
+	sorted = sort_them(stack_a);
+	set_index(stack_a, sorted);
+	if (size == 2)
+	{
+		sa(&stack_a, 1);
+	}
+	if (size == 3)
+	{
+		sorting3(&stack_a);
+	}
+	// printf("%d |\n", size);
+	// fill_stack_b(&stack_a, &stack_b, sorted);
+	// fill_stack_a(&stack_a, &stack_b);
+	// pause();
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_stacks	stacks;
-	char	**nbrs;
+	// t_list	*stacks;
+	char		**nbrs;
 
-	// int i = 0;
 	if (argc > 1)
 	{
 		nbrs = args_con(argv + 1);
-		make_stack(stack_size(nbrs), nbrs, &stacks);
-		// printf("%d $ %d\n", stacks->a[0], stacks->a[1]);
-		if (!(is_sorted(&stacks, stacks.size_a)))
-			printf("NON");
-		// printf("%d # %d\n", stacks->a[0], stacks->a[1]);
-		// free(stacks);
-		// printf("%d\n", stacks->a[0]);
-		// printf("%d\n", stacks->a[0]);
-		// stacks = make_stack();
-		// printf("%s", nbrs[0]);
-		// pause();
-		// into_stack();
-		// while (i <= stacks->size_a)
-		// {
-		// 	printf("%d =>  %d\n", i, stacks->a[i]);
-		// 	i++;
-		// }
-		// pause();
+		make_stack(stack_size(nbrs), nbrs);
 	}
 	return (0);
 }

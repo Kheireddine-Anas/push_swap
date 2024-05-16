@@ -6,7 +6,7 @@
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 22:35:21 by akheired          #+#    #+#             */
-/*   Updated: 2024/05/14 10:27:29 by akheired         ###   ########.fr       */
+/*   Updated: 2024/05/13 17:49:12 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,36 @@ char	*ft_strdup(char *s)
 	return (dst);
 }
 
-int	is_sorted(t_stacks *stack, int size)
+int	ft_lstsize(t_list *lst)
 {
-	int	i;
-	int	j;
+	int	count;
 
-	i = 0;
-	while (i <= size)
+	count = 0;
+	while (lst != NULL)
 	{
-		j = i + 1;
-		while (j <= size)
-		{
-			if (stack->a[i] < stack->a[j])
-				return (0);
-			j++;
-		}
-		i++;
+		count++;
+		lst = lst->next;
 	}
-	return (1);
+	return (count);
+}
+
+int	is_sorted(t_list *head)
+{
+	t_list	*node;
+	int	i;
+
+	i = ft_lstsize(head);
+	node = head->next;
+	while (i > 1 && (head->nbr < node->nbr))
+	{
+		head = head->next;
+		node = head->next;
+		i--;
+	}
+	if (i > 1)
+		return (1);
+	else
+		return (0);
 }
 
 int	get_biggest(int *stack, int size)
@@ -71,35 +83,53 @@ int	get_biggest(int *stack, int size)
 	return (in);
 }
 
-// void	fill_stack_a(t_stacks *stack)
-// {
-// 	int	biggest;
-// 	int size;
-// 	while (stack->size_b >= 0)
-// 	{
-// 		size = stack->size_b;
-// 		biggest = get_biggest(stack->b, stack->size_b);
-// 		if (biggest == stack->size_b)
-// 			pa(stack);
-// 		else if (biggest > size / 2)
-// 			rb(stack);
-// 		else if (biggest <= size / 2)
-// 			rrb(stack);
-// 	}
-// }
+int		get_max_index(t_list *stack)
+{
+	int	index;
 
-void	fill_stack_a(t_stacks *stack)
+	index = stack->index;
+	while (stack)
+	{
+		if (index < stack->index)
+			index = stack->index;
+		stack = stack->next;
+	}
+	return(index);
+}
+
+int	get_position(t_list *stack, int index)
+{
+	int	i;
+
+	i = 0;
+	while (stack)
+	{
+		if(index == stack->index)
+			break;
+		stack = stack->next;
+		i++;
+	}
+	return (i);
+}
+
+void	fill_stack_a(t_list **stack_a, t_list **stack_b)
 {
 	int	biggest;
-
-	while (stack->size_b >= 0)
+	int	size;
+	
+	
+	while (ft_lstsize(*stack_b) > 0)
 	{
-		biggest = get_biggest(stack->b, stack->size_b);
-		if (biggest == stack->size_b)
-			pa(stack);
-		else if (stack->size_b - biggest <= biggest)
-			rb(stack);
-		else if (stack->size_b - biggest > biggest)
-			rrb(stack);
+		size = ft_lstsize(*stack_b);
+		printf("%d  |  %d\n", (*stack_a)->index, (*stack_a)->nbr);
+		pause();
+		printf("hello\n");
+		biggest = get_max_index(*stack_b);
+		if ((*stack_b)->index == biggest)
+			pa(stack_a, stack_b, 1);
+		else if (get_position(*stack_b, biggest) <= (size / 2))
+			rb(stack_b, 1);
+		else if (get_position(*stack_b, biggest) > (size / 2))
+			rrb(stack_b, 1);
 	}
 }
