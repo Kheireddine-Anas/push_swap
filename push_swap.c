@@ -325,13 +325,10 @@ void	make_stack(int size, char **args)
 	sorted = sort_them(stack_a);
 	set_index(stack_a, sorted);
 	if (size == 2)
-	{
 		sa(&stack_a, 1);
-	}
-	if (size == 3)
-	{
+	else if (size == 3)
 		sorting3(&stack_a);
-	}
+	else if (size == 5)
 	// printf("%d |\n", size);
 	// fill_stack_b(&stack_a, &stack_b, sorted);
 	// fill_stack_a(&stack_a, &stack_b);
