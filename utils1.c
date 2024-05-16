@@ -30,19 +30,6 @@ char	*ft_strdup(char *s)
 	return (dst);
 }
 
-int	ft_lstsize(t_list *lst)
-{
-	int	count;
-
-	count = 0;
-	while (lst != NULL)
-	{
-		count++;
-		lst = lst->next;
-	}
-	return (count);
-}
-
 int	is_sorted(t_list *head)
 {
 	t_list	*node;
@@ -110,26 +97,4 @@ int	get_position(t_list *stack, int index)
 		i++;
 	}
 	return (i);
-}
-
-void	fill_stack_a(t_list **stack_a, t_list **stack_b)
-{
-	int	biggest;
-	int	size;
-	
-	
-	while (ft_lstsize(*stack_b) > 0)
-	{
-		size = ft_lstsize(*stack_b);
-		printf("%d  |  %d\n", (*stack_a)->index, (*stack_a)->nbr);
-		pause();
-		printf("hello\n");
-		biggest = get_max_index(*stack_b);
-		if ((*stack_b)->index == biggest)
-			pa(stack_a, stack_b, 1);
-		else if (get_position(*stack_b, biggest) <= (size / 2))
-			rb(stack_b, 1);
-		else if (get_position(*stack_b, biggest) > (size / 2))
-			rrb(stack_b, 1);
-	}
 }

@@ -69,16 +69,6 @@ int	ft_atoi(char *str)
 	return (sign * fnl);
 }
 
-int	stack_size(char **stack)
-{
-	int	i;
-
-	i = 0;
-	while (stack[i])
-		i++;
-	return (i);
-}
-
 int	check_duplicated(t_list *stack)
 {
 	t_list	*node;
@@ -94,5 +84,23 @@ int	check_duplicated(t_list *stack)
 		}
 		stack = stack->next;
 	}
+	return (0);
+}
+
+int	check_sort(t_list *stack)
+{
+	t_list	*head;
+	int	size;
+
+	size = ft_lstsize(stack);
+	head = stack->next;
+	while (size > 1 && stack->nbr < head->nbr)
+	{
+		size--;
+		stack = stack->next;
+		head = stack->next;
+	}
+	if (size > 1)
+		return (1);
 	return (0);
 }
