@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/06 22:35:21 by akheired          #+#    #+#             */
-/*   Updated: 2024/05/13 17:49:12 by akheired         ###   ########.fr       */
+/*   Created: 2024/05/17 09:31:29 by akheired          #+#    #+#             */
+/*   Updated: 2024/05/17 09:31:29 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*ft_strdup(char *s)
 int	is_sorted(t_list *head)
 {
 	t_list	*node;
-	int	i;
+	int		i;
 
 	i = ft_lstsize(head);
 	node = head->next;
@@ -70,7 +70,7 @@ int	get_biggest(int *stack, int size)
 	return (in);
 }
 
-int		get_max_index(t_list *stack)
+int	get_max_index(t_list *stack)
 {
 	int	index;
 
@@ -81,7 +81,7 @@ int		get_max_index(t_list *stack)
 			index = stack->index;
 		stack = stack->next;
 	}
-	return(index);
+	return (index);
 }
 
 int	get_position(t_list *stack, int index)
@@ -91,8 +91,8 @@ int	get_position(t_list *stack, int index)
 	i = 0;
 	while (stack)
 	{
-		if(index == stack->index)
-			break;
+		if (index == stack->index)
+			break ;
 		stack = stack->next;
 		i++;
 	}

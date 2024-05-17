@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   actions1.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/17 09:30:43 by akheired          #+#    #+#             */
+/*   Updated: 2024/05/17 09:39:51 by akheired         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	ra(t_list **stack_a, int man)
 {
 	t_list	*tmp;
 	t_list	*head;
-	int	size;
+	int		size;
 
 	size = ft_lstsize(*stack_a);
 	head = (*stack_a);

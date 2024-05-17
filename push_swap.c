@@ -5,24 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/14 19:35:48 by akheired          #+#    #+#             */
-/*   Updated: 2024/05/14 19:35:48 by akheired         ###   ########.fr       */
+/*   Created: 2024/05/17 09:30:55 by akheired          #+#    #+#             */
+/*   Updated: 2024/05/17 09:30:55 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	check_error(void)
-{
-	write(1, "Error\n", 7);
-	exit(1);
-}
-
 void	fill_stack_b(t_list **stack_a, t_list **stack_b)
 {
 	int	size;
 	int	range;
-	
+
 	range = 15;
 	size = ft_lstsize(*stack_a);
 	if (size >= 100 && size <= 500)
@@ -49,8 +43,8 @@ void	sorting5(t_list **stack_a, t_list **stack_b)
 {
 	while ((*stack_a)->index != 0)
 	{
-		if (get_position(*stack_a, 0) == 1 ||
-			get_position(*stack_a, 0) == 2)
+		if (get_position(*stack_a, 0) == 1
+			|| get_position(*stack_a, 0) == 2)
 			ra(stack_a, 1);
 		else
 			rra(stack_a, 1);
@@ -65,8 +59,8 @@ void	sorting5(t_list **stack_a, t_list **stack_b)
 	}
 	pb(stack_a, stack_b, 1);
 	sorting3(stack_a);
-	pa(stack_a, stack_b, 1);	
-	pa(stack_a, stack_b, 1);	
+	pa(stack_a, stack_b, 1);
+	pa(stack_a, stack_b, 1);
 }
 
 void	make_stack(int size, char **args, t_list **stack_a, t_list **stack_b)

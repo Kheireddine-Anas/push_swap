@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   actions2.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/17 09:30:45 by akheired          #+#    #+#             */
+/*   Updated: 2024/05/17 09:37:09 by akheired         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	rrb(t_list **stack_b, int man)
@@ -22,7 +34,7 @@ void	rrb(t_list **stack_b, int man)
 		*stack_b = lst;
 		lst->next = frst;
 		blst->next = NULL;
-		if(man)
+		if (man)
 			write(1, "rrb\n", 4);
 	}
 }

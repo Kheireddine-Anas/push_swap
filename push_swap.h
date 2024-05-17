@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/17 09:41:36 by akheired          #+#    #+#             */
+/*   Updated: 2024/05/17 09:41:36 by akheired         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -8,7 +19,7 @@
 # include <limits.h>
 # include <stddef.h>
 
-typedef struct	s_stacks{
+typedef struct s_stacks{
 	int	*a;
 	int	*b;
 	int	size_a;
@@ -16,9 +27,9 @@ typedef struct	s_stacks{
 	int	range;
 }	t_stacks;
 
-typedef struct	s_list{
-	int		nbr;
-	int		index;
+typedef struct s_list{
+	int				nbr;
+	int				index;
 	struct s_list	*next;	
 }	t_list;
 
@@ -34,7 +45,7 @@ int		ft_lstsize(t_list *lst);
 int		check_sort(t_list *stack);
 int		get_max_index(t_list *stack);
 int		is_sorted(t_list *stack);
-void	check_error();
+void	check_error(void);
 int		check_duplicated(t_list *stack);
 void	check_chars(char **args);
 void	check_nbrs(char **args);

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/06 15:19:13 by akheired          #+#    #+#             */
-/*   Updated: 2024/05/06 22:46:15 by akheired         ###   ########.fr       */
+/*   Created: 2024/05/17 09:31:18 by akheired          #+#    #+#             */
+/*   Updated: 2024/05/17 09:31:18 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	check_duplicated(t_list *stack)
 int	check_sort(t_list *stack)
 {
 	t_list	*head;
-	int	size;
+	int		size;
 
 	size = ft_lstsize(stack);
 	head = stack->next;
