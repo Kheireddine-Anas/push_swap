@@ -17,10 +17,10 @@ void	fill_stack_b(t_list **stack_a, t_list **stack_b)
 	int	size;
 	int	range;
 
-	range = 15;
+	range = 35;
 	size = ft_lstsize(*stack_a);
-	if (size >= 100 && size <= 500)
-		range = 35;
+	if (size <= 100)
+		range = 15;
 	range_algo(stack_a, stack_b, 0, range);
 }
 
@@ -52,7 +52,8 @@ void	sorting5(t_list **stack_a, t_list **stack_b)
 	pb(stack_a, stack_b, 1);
 	while ((*stack_a)->index != 1)
 	{
-		if (get_position(*stack_a, 1) == 1)
+		if (get_position(*stack_a, 1) == 1
+			|| get_position(*stack_a, 1) == 2)
 			ra(stack_a, 1);
 		else
 			rra(stack_a, 1);
@@ -63,7 +64,7 @@ void	sorting5(t_list **stack_a, t_list **stack_b)
 	pa(stack_a, stack_b, 1);
 }
 
-void	make_stack(int size, char **args, t_list **stack_a, t_list **stack_b)
+void	make_stack(int size, char **args, t_list **stack_a)
 {
 	t_list		*node;
 	int			i;
@@ -77,7 +78,7 @@ void	make_stack(int size, char **args, t_list **stack_a, t_list **stack_b)
 		i++;
 	}
 	if (!check_sort(*stack_a))
-		check_error();
+		exit(0);
 	if (check_duplicated(*stack_a))
 		check_error();
 	sorted = sort_them(*stack_a);
@@ -89,7 +90,7 @@ int	main(int argc, char **argv)
 	t_list	*stack_a;
 	t_list	*stack_b;
 	char	**nbrs;
-	int		size;
+	int		size = 0;
 
 	stack_a = NULL;
 	stack_b = NULL;
@@ -97,7 +98,7 @@ int	main(int argc, char **argv)
 	{
 		nbrs = args_con(argv + 1);
 		size = stack_size(nbrs);
-		make_stack(size, nbrs, &stack_a, &stack_b);
+		make_stack(size, nbrs, &stack_a);
 		if (size == 2)
 			sa(&stack_a, 1);
 		else if (size == 3)

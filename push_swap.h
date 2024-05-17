@@ -54,7 +54,7 @@ char	**args_con(char **args);
 void	*ft_calloc(int count, int size);
 int		*arr_cp(t_list *head, int size);
 int		*sort_them(t_list *stack);
-void	make_stack(int size, char **args, t_list **stack_a, t_list **stack_b);
+void	make_stack(int size, char **args, t_list **stack_a);
 void	range_algo(t_list **stack_a, t_list **stack_b, int start, int end);
 void	sorting3(t_list **stack_a);
 void	sorting5(t_list **stack_a, t_list **stack_b);
