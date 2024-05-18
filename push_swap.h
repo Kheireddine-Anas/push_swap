@@ -57,6 +57,7 @@ int		*sort_them(t_list *stack);
 void	make_stack(int size, char **args, t_list **stack_a);
 void	range_algo(t_list **stack_a, t_list **stack_b, int start, int end);
 void	sorting3(t_list **stack_a);
+void	lst_checker(t_list **stack_a, t_list **stack_b);
 void	sorting5(t_list **stack_a, t_list **stack_b);
 void	fill_stack_a(t_list **stack_a, t_list **stack_b);
 void	fill_stack_b(t_list **stack_a, t_list **stack_b);

@@ -6,7 +6,7 @@
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 09:31:39 by akheired          #+#    #+#             */
-/*   Updated: 2024/05/17 09:31:40 by akheired         ###   ########.fr       */
+/*   Updated: 2024/05/18 20:51:54 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int	ft_lstsize(t_list *lst)
 {
 	int	count;
 
+	if (!lst)
+		return 0;
 	count = 0;
 	while (lst != NULL)
 	{

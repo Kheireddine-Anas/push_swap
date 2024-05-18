@@ -6,34 +6,30 @@
 #    By: akheired <akheired@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/17 10:34:56 by akheired          #+#    #+#              #
-#    Updated: 2024/05/17 10:34:57 by akheired         ###   ########.fr        #
+#    Updated: 2024/05/18 20:01:27 by akheired         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = so_long
+NAME = push_swap
+NAME_BONUS = checker
 
-SRC =	so_long.c checkers/get_next_line_utils.c checkers/get_next_line.c checkers/ft_split.c checkers/ft_itoa.c\
-		checkers/utils.c checkers/utils1.c checkers/check_map.c textures/gui_map.c textures/arrow_keys.c
+SRC =	push_swap.c utils1.c utils2.c utils3.c utils4.c utils.c ft_split.c actions.c actions1.c actions2.c
+BSRC =	checker.c utils1.c utils2.c utils3.c utils4.c utils.c ft_split.c actions.c actions1.c actions2.c
 
-CFLAGS = -Wall -Wextra -Werror -Imlx
+CFLAGS = -Wall -Wextra -Werror
 
 OBJ = ${SRC:.c=.o}
-# OBJ_BONUS = ${SRC_BONUS:.c=.o}
+OBJ_BONUS = ${BSRC:.c=.o}
 
 all : $(NAME)
 
-# %.o: %.c
-# 	$(CC) -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
-
 $(NAME): $(OBJ)
-		$(CC) $(OBJ) -L/usr/local/include -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+		$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
-# $(NAME): $(OBJ)
-# 		$(CC) $(OBJ) -Lmlx_linux ./minilibx-linux/libmlx_Linux.a -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
-# bonus : $(NAME_BONUS)
+bonus : $(NAME_BONUS)
 
-# $(NAME_BONUS): $(OBJ_BONUS)
-# 				cc $(CFLAGS) $^ -o $(NAME_BONUS)
+$(NAME_BONUS): $(OBJ_BONUS)
+				$(CC) $(CFLAGS) $^ -o $(NAME_BONUS)
 
 clean : 
 	rm -rf $(OBJ) $(OBJ_BONUS)

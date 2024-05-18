@@ -16,6 +16,8 @@ void	sa(t_list **stack, int man)
 {
 	int	tmp;
 
+	if (ft_lstsize(*stack) < 2)
+		return ;
 	tmp = (*stack)->nbr;
 	(*stack)->nbr = (*stack)->next->nbr;
 	(*stack)->next->nbr = tmp;
@@ -27,6 +29,8 @@ void	sb(t_list **stack, int man)
 {
 	int	tmp;
 
+	if (ft_lstsize(*stack) < 2)
+		return ;
 	tmp = (*stack)->nbr;
 	(*stack)->nbr = (*stack)->next->nbr;
 	(*stack)->next->nbr = tmp;

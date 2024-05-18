@@ -92,6 +92,8 @@ int	check_sort(t_list *stack)
 	t_list	*head;
 	int		size;
 
+	if (!stack)
+		return (1);
 	size = ft_lstsize(stack);
 	head = stack->next;
 	while (size > 1 && stack->nbr < head->nbr)

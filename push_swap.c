@@ -90,8 +90,9 @@ int	main(int argc, char **argv)
 	t_list	*stack_a;
 	t_list	*stack_b;
 	char	**nbrs;
-	int		size = 0;
+	int		size;
 
+	size = 0;
 	stack_a = NULL;
 	stack_b = NULL;
 	if (argc > 1)

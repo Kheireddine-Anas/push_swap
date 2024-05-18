@@ -6,7 +6,7 @@
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 09:30:45 by akheired          #+#    #+#             */
-/*   Updated: 2024/05/17 09:37:09 by akheired         ###   ########.fr       */
+/*   Updated: 2024/05/18 20:57:15 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,12 @@ void	rrr(t_list **stack_a, t_list **stack_b, int man)
 	rrb(stack_b, man);
 	if (man)
 		write(1, "rrr\n", 4);
+}
+
+void	lst_checker(t_list **stack_a, t_list **stack_b)
+{
+	if (!check_sort(*stack_a) && ft_lstsize(*stack_b) == 0)
+		write(1, "OK\n", 4);
+	else
+		write(1, "KO\n", 4);
 }
