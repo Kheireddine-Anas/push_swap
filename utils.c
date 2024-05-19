@@ -63,7 +63,7 @@ int	ft_atoi(char *str)
 	{
 		rzlt = rzlt * 10 + (str[(i++)] - 48);
 		if ((rzlt > INT_MAX && sign == 1) || (rzlt > 2147483648 && sign == -1))
-			printf("NOD\n");
+			check_error();
 	}
 	fnl = rzlt;
 	return (sign * fnl);

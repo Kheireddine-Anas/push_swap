@@ -6,7 +6,7 @@
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 13:17:31 by akheired          #+#    #+#             */
-/*   Updated: 2024/05/18 21:07:15 by akheired         ###   ########.fr       */
+/*   Updated: 2024/05/18 21:53:20 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,5 @@ int	main(int argc, char **argv)
 		read_inst(&stack_a, &stack_b);
 		lst_checker(&stack_a, &stack_b);
 	}
-	system("leaks checker");
+	// system("leaks checker");
 }
