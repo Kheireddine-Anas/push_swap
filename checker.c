@@ -6,7 +6,7 @@
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 13:17:31 by akheired          #+#    #+#             */
-/*   Updated: 2024/05/18 21:53:20 by akheired         ###   ########.fr       */
+/*   Updated: 2024/05/19 15:39:54 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	apply_inst(t_list **stack_a, t_list **stack_b, char *buf)
 		rrb(stack_b, 0);
 	else if (buf[0] == 'r' && buf[1] == 'r' && buf[2] == 'r' && buf[3] == '\n')
 		rrr(stack_a, stack_b, 0);
-	else if (buf[0] != 's' && buf[0] != 'p' && buf[0] != 'r' && buf[0] != '\n')
+	else
 		check_error();
 }
 
@@ -88,6 +88,8 @@ void	read_inst(t_list **stack_a, t_list **stack_b)
 		if (buffer == '\n')
 		{
 			inst[i] = '\0';
+			if (inst[0] == '\n')
+				break ;
 			apply_inst(stack_a, stack_b, inst);
 			i = 0;
 		}
