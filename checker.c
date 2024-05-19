@@ -6,7 +6,7 @@
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 13:17:31 by akheired          #+#    #+#             */
-/*   Updated: 2024/05/19 15:39:54 by akheired         ###   ########.fr       */
+/*   Updated: 2024/05/19 15:56:31 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ void	read_inst(t_list **stack_a, t_list **stack_b)
 
 int	main(int argc, char **argv)
 {
-	t_list	*stack_a;
-	t_list	*stack_b;
+	t_list	*stack_a = NULL;
+	t_list	*stack_b = NULL;
 	char	**nbrs;
 
 	if (argc > 1)
